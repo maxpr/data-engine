@@ -1,0 +1,39 @@
+services:
+  pgdatabase:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=ny_taxi
+    volumes:
+      - "./ny_taxi_postgres_data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "8080:80"
+
+  notebook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./notebooks:/app/notebooks"
+      - "./data:/app/data"
+    entrypoint: /app/src/run_jupyter.sh
+
+    ports:
+      - "8888:8888"
+    
+  data_ingestion:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./data:/app/data"
+    entrypoint: /app/src/ingest.sh
