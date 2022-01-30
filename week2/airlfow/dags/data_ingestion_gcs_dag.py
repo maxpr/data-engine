@@ -8,7 +8,7 @@ from airflow.operators.python import PythonOperator
 
 from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateExternalTableOperator
 
-from helpers import upload_to_gcs, format_to_parquet
+from helpers import upload_to_gcs, csv_to_parquet
 
 PROJECT_ID = os.environ.get("GCP_PROJECT_ID")
 BUCKET = os.environ.get("GCP_GCS_BUCKET")
@@ -43,7 +43,7 @@ with DAG(
 
     format_to_parquet_task = PythonOperator(
         task_id="format_to_parquet_task",
-        python_callable=format_to_parquet,
+        python_callable=csv_to_parquet,
         op_kwargs={
             "original_path": f"{path_to_local_home}/{dataset_file}",
         },
