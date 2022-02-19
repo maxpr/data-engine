@@ -23,6 +23,5 @@ select
     SR_Flag as sr_flag,
     Affiliated_base_number as a_base_number,
 
-from `zoom-camp-project-23525`.`trips_data_all`.`external_for_hire_vehicles_tripdata`
-limit 100;
+from `zoom-camp-project-23525`.`trips_data_all`.`fhv_tripdata`;
 

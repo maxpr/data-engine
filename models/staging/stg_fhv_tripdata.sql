@@ -12,5 +12,11 @@ select
     SR_Flag as sr_flag,
     Affiliated_base_number as a_base_number,
 
-from {{ source('staging', 'external_for_hire_vehicles_tripdata') }}
-limit 100
+from {{ source('staging', 'fhv_tripdata') }}
+
+-- dbt build --m <model.sql> --var 'is_test_run: false'
+{% if var('is_test_run', default=true) %}
+
+  limit 100
+
+{% endif %}
