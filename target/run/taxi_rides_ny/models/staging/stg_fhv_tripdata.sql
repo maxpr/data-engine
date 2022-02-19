@@ -1,5 +1,9 @@
 
 
+  create or replace view `zoom-camp-project-23525`.`dbt_mpremi`.`stg_fhv_tripdata`
+  OPTIONS()
+  as 
+
 
 select 
     to_hex(md5(cast(coalesce(cast(dispatching_base_num as 
@@ -20,3 +24,7 @@ select
     Affiliated_base_number as a_base_number,
 
 from `zoom-camp-project-23525`.`trips_data_all`.`fhv_tripdata`
+
+-- dbt build --m <model.sql> --var 'is_test_run: false'
+;
+

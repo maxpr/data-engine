@@ -20,3 +20,5 @@ select
     Affiliated_base_number as a_base_number,
 
 from `zoom-camp-project-23525`.`trips_data_all`.`fhv_tripdata`
+
+-- dbt build --m <model.sql> --var 'is_test_run: false'
