@@ -3,3 +3,5 @@ week1/data/*
 logs/*
 *.log
 __pycache__/
+week5/data/*
+*.ipynb_checkpoints
